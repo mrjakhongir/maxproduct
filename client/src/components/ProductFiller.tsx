@@ -4,6 +4,7 @@ import Label from './Label';
 type ProductFillerProps = {
 	setFiller: React.Dispatch<React.SetStateAction<string>>;
 	thickness: string;
+	filler: string;
 };
 
 const options = [
@@ -11,7 +12,7 @@ const options = [
 	{ id: 2, label: 'Базалт', value: 'basalt' },
 	{ id: 3, label: 'Пенополиуретана', value: 'polyurethaneFoam' },
 ];
-function ProductFiller({ setFiller, thickness }: ProductFillerProps) {
+function ProductFiller({ setFiller, thickness, filler }: ProductFillerProps) {
 	return (
 		<div className='flex gap-10 text-slate-700'>
 			<Label content='Filler:' />
@@ -19,6 +20,7 @@ function ProductFiller({ setFiller, thickness }: ProductFillerProps) {
 				stateSetter={setFiller}
 				options={options}
 				thickness={thickness}
+				value={filler}
 			/>
 		</div>
 	);

@@ -10,7 +10,7 @@ function ObjectArea({ setArea, area }: ObjectAreaProps) {
 		<div className='flex gap-10 text-slate-700'>
 			<Label content='Object Area (m2):' />
 			<input
-				className='flex-1 px-3 py-1 max-w-[180px] rounded-md bg-transparent border'
+				className='flex-1 px-3 py-1 min-w-24 max-w-[180px] rounded-md bg-transparent border'
 				type='number'
 				min={1}
 				placeholder='Enter object area'

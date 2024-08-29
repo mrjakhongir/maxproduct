@@ -3,6 +3,7 @@ import Label from './Label';
 
 type ProductThicknessProps = {
 	setThickness: React.Dispatch<React.SetStateAction<string>>;
+	thickness: string;
 };
 
 const options = [
@@ -13,11 +14,15 @@ const options = [
 	{ id: 5, label: '150 MM', value: 't150' },
 ];
 
-function ProductThickness({ setThickness }: ProductThicknessProps) {
+function ProductThickness({ setThickness, thickness }: ProductThicknessProps) {
 	return (
 		<div className='flex gap-10 text-slate-700'>
 			<Label content='Product Thickness:' />
-			<Dropdown stateSetter={setThickness} options={options} />
+			<Dropdown
+				stateSetter={setThickness}
+				options={options}
+				value={thickness}
+			/>
 		</div>
 	);
 }

@@ -13,3 +13,14 @@ export interface DataStructure {
 		};
 	};
 }
+
+export interface Area {
+	type: string;
+	thickness: string;
+	coverThickness: string;
+	filler: string;
+	area: string;
+	price: string;
+	total: number;
+	name: string;
+}
