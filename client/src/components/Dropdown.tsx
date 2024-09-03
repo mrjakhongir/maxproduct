@@ -1,24 +1,33 @@
-import { Option } from '../lib/definitions';
+import { Area, Option } from '../lib/definitions';
 
 type DropdownProps = {
-	stateSetter: React.Dispatch<React.SetStateAction<string>>;
+	stateSetter: React.Dispatch<React.SetStateAction<Area[]>>;
 	options: Option[];
-	thickness?: string;
-	value: string;
+	feat: string;
+	newOrder: Area;
 };
 
-function Dropdown({ stateSetter, options, thickness, value }: DropdownProps) {
+function Dropdown({ stateSetter, options, feat, newOrder }: DropdownProps) {
 	return (
 		<select
-			className='flex-1 px-3 py-1 min-w-24 max-w-[180px] rounded-md bg-transparent border'
-			value={value}
-			onChange={(e) => stateSetter(e.target.value)}>
+			className='flex-1 px-3 py-3 min-w-24 max-w-[220px] rounded-md bg-transparent border text-lg cursor-pointer transition-all hover:border-slate-700'
+			value={newOrder[feat]}
+			onChange={(e) =>
+				stateSetter((prevState) => {
+					const updated = prevState.map((order) =>
+						order.id === newOrder.id
+							? { ...order, [feat]: e.target.value }
+							: order
+					);
+					return updated;
+				})
+			}>
 			{options.map((option) => (
 				<option
 					key={option.id}
 					value={option.value}
 					disabled={
-						thickness !== 't100' && option.value === 'polyurethaneFoam'
+						newOrder.thickness !== 't100' && option.value === 'polyurethaneFoam'
 					}>
 					{option.label}
 				</option>

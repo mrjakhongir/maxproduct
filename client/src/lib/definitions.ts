@@ -15,12 +15,11 @@ export interface DataStructure {
 }
 
 export interface Area {
+	[key: string]: string | number;
+	id: number;
 	type: string;
 	thickness: string;
 	coverThickness: string;
 	filler: string;
 	area: string;
-	price: string;
-	total: number;
-	name: string;
 }

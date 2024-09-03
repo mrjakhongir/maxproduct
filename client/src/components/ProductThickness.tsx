@@ -1,9 +1,10 @@
+import { Area } from '../lib/definitions';
 import Dropdown from './Dropdown';
 import Label from './Label';
 
 type ProductThicknessProps = {
-	setThickness: React.Dispatch<React.SetStateAction<string>>;
-	thickness: string;
+	setNewOrder: React.Dispatch<React.SetStateAction<Area[]>>;
+	newOrder: Area;
 };
 
 const options = [
@@ -14,14 +15,15 @@ const options = [
 	{ id: 5, label: '150 MM', value: 't150' },
 ];
 
-function ProductThickness({ setThickness, thickness }: ProductThicknessProps) {
+function ProductThickness({ setNewOrder, newOrder }: ProductThicknessProps) {
 	return (
-		<div className='flex gap-10 text-slate-700'>
+		<div className='flex items-center gap-10 text-slate-700'>
 			<Label content='Product Thickness:' />
 			<Dropdown
-				stateSetter={setThickness}
+				stateSetter={setNewOrder}
+				newOrder={newOrder}
 				options={options}
-				value={thickness}
+				feat='thickness'
 			/>
 		</div>
 	);

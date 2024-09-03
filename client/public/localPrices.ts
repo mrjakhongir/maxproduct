@@ -1,4 +1,4 @@
-import { DataStructure } from './../src/lib/definitions';
+import { DataStructure } from '../src/lib/definitions';
 const data: DataStructure = {
 	border: {
 		t50: {

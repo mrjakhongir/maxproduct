@@ -1,27 +1,28 @@
+import { SetStateAction } from 'react';
+import Dropdown from './Dropdown';
+import Label from './Label';
+import { Area } from '../lib/definitions';
+
 type ProductTypeProps = {
-	setType: React.Dispatch<React.SetStateAction<string>>;
-	type: string;
+	newOrder: Area;
+	setNewOrder: React.Dispatch<SetStateAction<Area[]>>;
 };
 
-function ProductType({ type, setType }: ProductTypeProps) {
+const options = [
+	{ id: 1, label: 'Border', value: 'border' },
+	{ id: 2, label: 'Roof', value: 'roof' },
+];
+
+function ProductType({ newOrder, setNewOrder }: ProductTypeProps) {
 	return (
-		<div className='flex gap-3 border-b text-lg font-semibold text-slate-700 pb-2'>
-			<button
-				className={`cursor-pointer px-1 hover:text-orange-600 transition-all flex gap-[2px] items-center select-none ${
-					type === 'border' && 'text-orange-600'
-				}`}
-				onClick={() => setType('border')}>
-				<span className='text-3xl -mt-[2px]'>•</span>
-				<span>Border</span>
-			</button>
-			<button
-				className={`cursor-pointer px-1 hover:text-orange-600 transition-all flex gap-[2px] items-center select-none ${
-					type === 'roof' && 'text-orange-600'
-				}`}
-				onClick={() => setType('roof')}>
-				<span className='text-3xl -mt-[2px]'>•</span>
-				<span>Roof</span>
-			</button>
+		<div className='flex items-center gap-10 text-slate-700'>
+			<Label content='Product Type:' />
+			<Dropdown
+				stateSetter={setNewOrder}
+				newOrder={newOrder}
+				options={options}
+				feat='type'
+			/>
 		</div>
 	);
 }

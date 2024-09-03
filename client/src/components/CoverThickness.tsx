@@ -1,9 +1,10 @@
+import { Area } from '../lib/definitions';
 import Dropdown from './Dropdown';
 import Label from './Label';
 
 type CoverThicknessProps = {
-	setCoverThickness: React.Dispatch<React.SetStateAction<string>>;
-	coverThickness: string;
+	setNewOrder: React.Dispatch<React.SetStateAction<Area[]>>;
+	newOrder: Area;
 };
 
 const options = [
@@ -13,17 +14,15 @@ const options = [
 	{ id: 4, label: '0.5 MM', value: 'ct05' },
 ];
 
-function CoverThickness({
-	setCoverThickness,
-	coverThickness,
-}: CoverThicknessProps) {
+function CoverThickness({ setNewOrder, newOrder }: CoverThicknessProps) {
 	return (
-		<div className='flex gap-10 text-slate-700'>
+		<div className='flex items-center gap-10 text-slate-700'>
 			<Label content='Cover Thickness:' />
 			<Dropdown
-				stateSetter={setCoverThickness}
+				stateSetter={setNewOrder}
 				options={options}
-				value={coverThickness}
+				feat='coverThickness'
+				newOrder={newOrder}
 			/>
 		</div>
 	);

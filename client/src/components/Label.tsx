@@ -5,7 +5,7 @@ type LabelProps = {
 function Label({ content, theme }: LabelProps) {
 	return (
 		<h2
-			className={`flex-1 text-lg font-medium ${
+			className={`flex-1 font-semibold ${
 				theme === 'dark' ? 'text-white' : 'text-slate-900'
 			}`}>
 			{content}
