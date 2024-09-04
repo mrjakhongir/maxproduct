@@ -17,7 +17,7 @@ function Preview() {
 	useEffect(() => {
 		setTimeout(() => {
 			window.scrollTo(0, 0);
-		}, 0);
+		}, 2);
 	}, [location.pathname]);
 
 	async function printOrder() {
