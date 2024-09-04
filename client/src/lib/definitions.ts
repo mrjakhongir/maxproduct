@@ -19,7 +19,9 @@ export interface Area {
 	id: number;
 	type: string;
 	thickness: string;
-	coverThickness: string;
+	upperCoverThickness: string;
+	lowerCoverThickness: string;
 	filler: string;
+	discount: string;
 	area: string;
 }

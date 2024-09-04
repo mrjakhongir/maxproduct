@@ -3,18 +3,21 @@ import AccordionLabel from '../components/AccordionLabel';
 import Features from '../components/Features';
 import AddBtn from '../components/AddBtn.tsx';
 import { Area } from '../lib/definitions.ts';
+import PrintBtn from '../components/PrintBtn.tsx';
 
 function LocalMarket() {
-	const [openBody, setOpenBody] = useState(false);
 	const [orders, setOrders] = useState<Area[]>([]);
-	const btnRef = useRef<HTMLButtonElement>(null);
+	const [openBody, setOpenBody] = useState(true);
+	const btnRef = useRef<HTMLDivElement>(null);
 
 	const newOrder = {
 		id: orders?.length,
 		type: 'border',
 		thickness: 't50',
-		coverThickness: 'ct035',
+		upperCoverThickness: 'ct035',
+		lowerCoverThickness: 'ct035',
 		filler: 'polystyreneFoam',
+		discount: '5',
 		area: '1',
 	};
 
@@ -23,7 +26,11 @@ function LocalMarket() {
 	function addArea() {
 		setOrders([...orders, newOrder]);
 		setTimeout(() => {
-			btnRef.current?.scrollIntoView({ behavior: 'smooth' });
+			btnRef.current?.scrollIntoView({
+				behavior: 'smooth',
+				block: 'end',
+				inline: 'nearest',
+			});
 		}, 0);
 	}
 
@@ -33,6 +40,7 @@ function LocalMarket() {
 				content='Local market'
 				trigger={setOpenBody}
 				openBody={openBody}
+				src='/pin.svg'
 			/>
 			<div
 				className={`flex flex-col h-0 overflow-y-hidden transition-all ${
@@ -49,8 +57,10 @@ function LocalMarket() {
 							/>
 						))}
 				</div>
-
-				<AddBtn addArea={addArea} btnRef={btnRef} />
+				<div className='flex gap-5 mt-5 pb-5' ref={btnRef}>
+					<PrintBtn orders={orders} />
+					<AddBtn addArea={addArea} />
+				</div>
 			</div>
 		</div>
 	);
