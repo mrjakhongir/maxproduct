@@ -121,9 +121,10 @@ function Preview() {
 										className='[&>td]:border [&>td]:border-slate-700 [&>td]:text-center [&>td]:p-1'>
 										<td>{index + 1}</td>
 										<td>
-											Трёхслойные Цена со скидкой{' '}
-											{market === 'Foreign' ? '' : '(с НДС)'} Сэндвич панели из{' '}
-											{convertFillerName(order.filler)}
+											Трёхслойные{' '}
+											{order.type === 'roof' ? 'кровельные' : 'стеновые'} Цена
+											со скидкой {market === 'Foreign' ? '' : '(с НДС)'} Сэндвич
+											панели из {convertFillerName(order.filler)}
 										</td>
 										<td>м2</td>
 										<td>ТМЗ</td>
@@ -165,13 +166,20 @@ function Preview() {
 								месяцев со дня поставки.
 							</li>
 						</ul>
-						<div className='flex justify-between items-end pr-40'>
+						<div className='flex items-center justify-between items-end'>
 							<span>
 								С уважением, <br />
 								Директор
 							</span>
-							<span>Хамиев А.Х.</span>
-							<span>Stamp</span>
+							<div className='flex items-center'>
+								<span>Хамиев А.Х.</span>
+								<img
+									src='/signature.png'
+									alt='signature of director'
+									width={120}
+								/>
+								<img src='/stamp.png' alt='company stamp' width={200} />
+							</div>
 						</div>
 					</div>
 					<img
