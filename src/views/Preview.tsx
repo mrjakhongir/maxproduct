@@ -69,9 +69,9 @@ function Preview() {
 				Download
 			</button>
 			<div className='flex flex-col gap-5'>
-				{/* <div
+				<div
 					className='w-[794px] h-[1123px] mx-auto border border-slate-400 bg-[url("/1.png")] bg-contain bg-center bg-no-repeat'
-					ref={pageOneRef}></div> */}
+					ref={pageOneRef}></div>
 				<div
 					className='flex flex-col w-[794px] h-[1123px] mx-auto border border-slate-400 text-[16px]'
 					ref={pageTwoRef}>
