@@ -11,7 +11,7 @@ function ObjectArea({ setNewOrder, newOrder }: ObjectAreaProps) {
 		<div className='flex items-center gap-10 text-slate-700'>
 			<Label content='Object Area (m2):' />
 			<input
-				className='flex-1 p-3 min-w-24 max-w-[220px] rounded-md bg-transparent border'
+				className='flex-1 p-3 min-w-24 max-w-[250px] rounded-md bg-transparent border'
 				type='number'
 				min={1}
 				placeholder='Enter object area'

@@ -1,31 +1,26 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import { Area } from '../lib/definitions';
 
 type DataContextType = {
-	data: Area[];
-	setData: React.Dispatch<React.SetStateAction<Area[]>>;
+	orders: Area[];
+	setOrders: React.Dispatch<React.SetStateAction<Area[]>>;
+	market: string;
+	setMarket: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const DataContext = createContext<DataContextType | null>(null);
+export const DataContext = createContext<DataContextType | null>(null);
 
 type DataProviderProps = {
 	children: React.ReactNode;
 };
 
 export function DataProvider({ children }: DataProviderProps) {
-	const [data, setData] = useState<Area[]>([]);
+	const [orders, setOrders] = useState<Area[]>([]);
+	const [market, setMarket] = useState('Local');
 
 	return (
-		<DataContext.Provider value={{ data, setData }}>
+		<DataContext.Provider value={{ orders, setOrders, market, setMarket }}>
 			{children}
 		</DataContext.Provider>
 	);
-}
-
-export function useData() {
-	const context = useContext(DataContext);
-	if (!context) {
-		throw new Error('useData must be used within a DataProvider');
-	}
-	return context;
 }

@@ -2,17 +2,21 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useData } from '../components/Context';
 import {
 	calculatePrice,
 	convertFillerName,
+	formatDate,
+	formatString,
+	generateInvoiceNumber,
 	removeFromLeft,
 } from '../lib/utils';
 import { Area } from '../lib/definitions';
+import { useData } from '../hooks/useData';
 
 function Preview() {
 	const pageRef = useRef<HTMLDivElement>(null);
 	const location = useLocation();
+	const { market, orders } = useData();
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -35,12 +39,13 @@ function Preview() {
 			pdf.save('order.pdf');
 		}
 	}
-	const { data } = useData();
 
 	function calcPrice(order: Area) {
-		const { totalPriceWithDiscount } = calculatePrice(order);
-		return totalPriceWithDiscount;
+		const { price } = calculatePrice(order, market);
+		const priceWithWAT = price + price * 0.15;
+		return formatString(priceWithWAT, market);
 	}
+
 	return (
 		<div className='p-5 flex flex-col'>
 			<button
@@ -60,8 +65,8 @@ function Preview() {
 					25110
 				</p>
 				<div className='flex intems-center justify-between mb-5'>
-					<span>№ 500</span>
-					<span>04 September 2024</span>
+					<span>№ {generateInvoiceNumber()}</span>
+					<span>{formatDate()}</span>
 				</div>
 				<p className='text-[#052338] text-center font-semibold mb-5'>
 					Коммерческое предложение.
@@ -81,17 +86,18 @@ function Preview() {
 							<th>Толщина металла (верх/вниз) </th>
 							<th>Толщина продукции</th>
 							<th>Кол.во</th>
-							<th>Цена (с НДС)</th>
+							<th>Цена {market === 'Foreign' ? '' : '(с НДС)'}</th>
 						</tr>
 					</thead>
 					<tbody>
-						{data?.map((order, index) => (
+						{orders.map((order, index) => (
 							<tr
-								key={order.id}
+								key={index}
 								className='[&>td]:border [&>td]:border-slate-700 [&>td]:text-center [&>td]:p-1'>
 								<td>{index + 1}</td>
 								<td>
-									Трёхслойные Цена со скидкой (без НДС) Сэндвич панели из{' '}
+									Трёхслойные Цена со скидкой{' '}
+									{market === 'Foreign' ? '' : '(с НДС)'} Сэндвич панели из{' '}
 									{convertFillerName(order.filler)}
 								</td>
 								<td>м2</td>
@@ -105,8 +111,8 @@ function Preview() {
 									</div>
 								</td>
 								<td>{removeFromLeft(order.thickness, 1)}мм</td>
-								<td>{order.area}</td>
-								<td>${calcPrice(order)}</td>
+								<td>1</td>
+								<td>{calcPrice(order)}</td>
 							</tr>
 						))}
 					</tbody>

@@ -11,7 +11,7 @@ function ProductDiscount({ setNewOrder, newOrder }: ProductDiscountProps) {
 		<div className='flex items-center gap-10 text-slate-700'>
 			<Label content='Discount (%):' />
 			<input
-				className='flex-1 p-3 min-w-24 max-w-[220px] rounded-md bg-transparent border'
+				className='flex-1 p-3 min-w-24 max-w-[250px] rounded-md bg-transparent border'
 				type='number'
 				min={0}
 				placeholder='Enter object area'

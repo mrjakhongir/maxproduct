@@ -10,7 +10,7 @@ type DropdownProps = {
 function Dropdown({ stateSetter, options, feat, newOrder }: DropdownProps) {
 	return (
 		<select
-			className='flex-1 px-3 py-3 min-w-24 max-w-[220px] rounded-md bg-transparent border text-lg cursor-pointer transition-all hover:border-slate-700'
+			className='flex-1 px-3 py-3 min-w-24 max-w-[250px] rounded-md bg-transparent border text-lg cursor-pointer transition-all hover:border-slate-700'
 			value={newOrder[feat]}
 			onChange={(e) =>
 				stateSetter((prevState) => {
