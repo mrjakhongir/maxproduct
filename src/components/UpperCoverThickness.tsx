@@ -20,7 +20,7 @@ function UpperCoverThickness({
 }: UpperCoverThicknessProps) {
 	return (
 		<div className='flex items-center gap-10 text-slate-700'>
-			<Label content='Upper Cover Thickness:' />
+			<Label content='Верхний толщина металла:' />
 			<Dropdown
 				stateSetter={setNewOrder}
 				options={options}

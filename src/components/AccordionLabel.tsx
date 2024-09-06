@@ -21,7 +21,9 @@ function AccordionLabel({
 			onClick={() => trigger(content)}>
 			<div className='flex items-center gap-2'>
 				<img src={src} alt='icon' width={24} height={24} />
-				<span className='font-semibold'>{content}</span>
+				<span className='font-semibold'>
+					{content === 'Foreign' ? 'Иностранный' : 'Местный'}
+				</span>
 			</div>
 		</div>
 	);

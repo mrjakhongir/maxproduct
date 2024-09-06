@@ -9,12 +9,12 @@ type ProductDiscountProps = {
 function ProductDiscount({ setNewOrder, newOrder }: ProductDiscountProps) {
 	return (
 		<div className='flex items-center gap-10 text-slate-700'>
-			<Label content='Discount (%):' />
+			<Label content='Скидка (%):' />
 			<input
 				className='flex-1 p-3 min-w-24 max-w-[250px] rounded-md bg-transparent border'
 				type='number'
 				min={0}
-				placeholder='Enter object area'
+				placeholder='Введите скидку...'
 				value={newOrder.discount}
 				onChange={(e) =>
 					setNewOrder((prevState) => {

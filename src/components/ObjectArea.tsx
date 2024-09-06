@@ -9,12 +9,12 @@ type ObjectAreaProps = {
 function ObjectArea({ setNewOrder, newOrder }: ObjectAreaProps) {
 	return (
 		<div className='flex items-center gap-10 text-slate-700'>
-			<Label content='Object Area (m2):' />
+			<Label content='Площадь объекта (м2):' />
 			<input
 				className='flex-1 p-3 min-w-24 max-w-[250px] rounded-md bg-transparent border'
 				type='number'
 				min={1}
-				placeholder='Enter object area'
+				placeholder='Введите область объекта...'
 				value={newOrder.area}
 				onChange={(e) =>
 					setNewOrder((prevState) => {

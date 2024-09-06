@@ -8,7 +8,7 @@ function Form() {
 	const { orders, setOrders, market } = useData();
 	const btnRef = useRef<HTMLDivElement>(null);
 	const newOrder = {
-		id: orders.length,
+		id: orders.length * Date.now(),
 		type: 'border',
 		thickness: 't50',
 		upperCoverThickness: 'ct035',

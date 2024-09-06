@@ -10,7 +10,7 @@ function AddBtn({ addArea }: AddBtnProps) {
 			<span className='inline-flex items-center justify-center w-7 h-7 border border-slate-700 rounded-full mr-2'>
 				+
 			</span>
-			Add
+			Добавить
 		</button>
 	);
 }

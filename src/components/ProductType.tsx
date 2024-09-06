@@ -9,14 +9,14 @@ type ProductTypeProps = {
 };
 
 const options = [
-	{ id: 1, label: 'Border', value: 'border' },
-	{ id: 2, label: 'Roof', value: 'roof' },
+	{ id: 1, label: 'Стеновые', value: 'border' },
+	{ id: 2, label: 'Кровелные', value: 'roof' },
 ];
 
 function ProductType({ newOrder, setNewOrder }: ProductTypeProps) {
 	return (
 		<div className='flex items-center gap-10 text-slate-700'>
-			<Label content='Product Type:' />
+			<Label content='Тип продукта:' />
 			<Dropdown
 				stateSetter={setNewOrder}
 				newOrder={newOrder}

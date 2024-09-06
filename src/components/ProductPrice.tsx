@@ -14,11 +14,11 @@ function ProductPrice({ newOrder }: ProductPriceProps) {
 	return (
 		<div className='flex flex-col justify-between border-t bg-[#0066B0] text-white rounded-md py-1 px-2'>
 			<div className='flex justify-between'>
-				<h2 className='font-semibold'>Price:</h2>
+				<h2 className='font-semibold'>Цена:</h2>
 				<span>{formattedPrice}</span>
 			</div>
 			<div className='flex justify-between'>
-				<h2 className='font-semibold'>Total Price:</h2>
+				<h2 className='font-semibold'>Общая стоимость:</h2>
 				<p className='font-semibold'>{formattedTotalPrice}</p>
 			</div>
 		</div>

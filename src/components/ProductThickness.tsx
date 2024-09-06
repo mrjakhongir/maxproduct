@@ -18,7 +18,7 @@ const options = [
 function ProductThickness({ setNewOrder, newOrder }: ProductThicknessProps) {
 	return (
 		<div className='flex items-center gap-10 text-slate-700'>
-			<Label content='Product Thickness:' />
+			<Label content='Толщина сендвичаs:' />
 			<Dropdown
 				stateSetter={setNewOrder}
 				newOrder={newOrder}

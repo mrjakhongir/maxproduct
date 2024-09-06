@@ -15,7 +15,7 @@ const options = [
 function ProductFiller({ setNewOrder, newOrder }: ProductFillerProps) {
 	return (
 		<div className='flex items-center gap-10 text-slate-700'>
-			<Label content='Filler:' />
+			<Label content='Наполнитель:' />
 			<Dropdown
 				stateSetter={setNewOrder}
 				newOrder={newOrder}
