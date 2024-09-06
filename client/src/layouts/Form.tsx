@@ -5,7 +5,7 @@ import PrintBtn from '../components/PrintBtn.tsx';
 import { useData } from '../hooks/useData.tsx';
 
 function Form() {
-	const { orders, setOrders } = useData();
+	const { orders, setOrders, market } = useData();
 	const btnRef = useRef<HTMLDivElement>(null);
 	const newOrder = {
 		id: orders.length,
@@ -18,7 +18,7 @@ function Form() {
 		area: '1',
 	};
 
-	useEffect(() => setOrders([newOrder]), []);
+	useEffect(() => setOrders([newOrder]), [market]);
 
 	function addArea() {
 		setOrders([...orders, newOrder]);
