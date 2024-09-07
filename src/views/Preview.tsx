@@ -38,7 +38,7 @@ function Preview() {
 			const page = pages[i].current;
 			if (page) {
 				const canvas = await html2canvas(page, {
-					scale: window.devicePixelRatio || 2,
+					scale: 2,
 				});
 				const imgData = canvas.toDataURL('image/jpeg', 1);
 				const imgWidth = canvas.width;
@@ -72,8 +72,8 @@ function Preview() {
 	}, []);
 
 	return (
-		<div className='p-5 flex flex-col'>
-			<div className='mb-5 text-white text-lg font-semibold mx-auto flex items-center gap-8'>
+		<div className='p-2 md:p-5 flex flex-col'>
+			<div className='mb-5 text-white text-sm md:text-lg font-semibold mx-auto flex items-center gap-8'>
 				<Link
 					to='..'
 					className='rounded-md py-2 px-8 bg-orange-500 transition-all hover:opacity-80 active:scale-95 '>
@@ -87,17 +87,23 @@ function Preview() {
 			</div>
 			<div className='flex flex-col gap-5'>
 				<div
-					className='w-[794px] h-[1123px] mx-auto border border-slate-400 bg-[url("/1.jpg")] bg-contain bg-center bg-no-repeat'
-					ref={pageOneRef}></div>
+					className='max-w-[794px] w-full max-h-[1123px] shadow-xl mx-auto'
+					ref={pageOneRef}>
+					<img
+						className='w-full h-full object-contain'
+						src='/1.jpg'
+						alt='max product info'
+					/>
+				</div>
 				<div
-					className='flex flex-col w-[794px] h-[1123px] mx-auto border border-slate-400 text-[16px]'
+					className='flex flex-col max-w-[794px] w-full h-[1123px] shadow-xl mx-auto text-sm'
 					ref={pageTwoRef}>
 					<img
-						className='mb-10 self-end max-w-[570px]'
+						className='mb-10 self-end w-[60%] max-w-[570px]'
 						src='/4.png'
 						alt='maxproduct logo illustrator'
 					/>
-					<div className='px-5'>
+					<div className='px-2 md:px-5'>
 						<p className='text-[#052338] text-center font-semibold underline'>
 							Общество с ограниченной ответственностью
 						</p>
@@ -106,11 +112,11 @@ function Preview() {
 							20214000700884954001 “КАПИТАЛБАНК” филиал Сергели в г. Ташкент МФО
 							01042 ИНН 305570277 ОКЭД 25110
 						</p>
-						<div className='flex intems-center justify-between mb-5'>
+						<div className='flex intems-center justify-between mb-2 md:mb-5'>
 							<span>№ {generateInvoiceNumber()}</span>
 							<span>{formatDate()}</span>
 						</div>
-						<p className='text-[#052338] text-center font-semibold mb-5'>
+						<p className='text-[#052338] text-center font-semibold mb-2 md:mb-5'>
 							Коммерческое предложение.
 						</p>
 						<p className='text-center mb-5'>
@@ -118,9 +124,9 @@ function Preview() {
 							предприятие может изготовить и поставить в Ваш адрес нашу
 							продукцию согласно нижеследующей таблице:
 						</p>
-						<table className='mb-5 text-[14px] border border-collapse'>
+						<table className='mb-2 md:mb-5 text-[10px] md:text-sm border border-collapse'>
 							<thead>
-								<tr className='[&>th]:border [&>th]:border-slate-700 [&>th]:p-2'>
+								<tr className='[&>th]:border [&>th]:border-slate-700 [&>th]:p-1 md:[&>th]:p-2'>
 									<th>№</th>
 									<th>Наименование продукции</th>
 									<th>Ед.изм</th>
@@ -135,7 +141,7 @@ function Preview() {
 								{orders.map((order, index) => (
 									<tr
 										key={index}
-										className='[&>td]:border [&>td]:border-slate-700 [&>td]:text-center [&>td]:p-1'>
+										className='[&>td]:border [&>td]:border-slate-700 [&>td]:text-center md:[&>td]:p-1'>
 										<td>{index + 1}</td>
 										<td>
 											Трёхслойные{' '}
@@ -159,7 +165,7 @@ function Preview() {
 								))}
 							</tbody>
 						</table>
-						<ul className='text-sm font-semibold mb-10'>
+						<ul className='text-sm md:font-semibold mb-10'>
 							<li>
 								Условия оплаты: 100 % предоплата за согласованную партию
 								продукции.
@@ -182,7 +188,7 @@ function Preview() {
 								месяцев со дня поставки.
 							</li>
 						</ul>
-						<div className='flex items-center justify-between items-end'>
+						<div className='flex text-sm md:text-lg items-center justify-between gap-2'>
 							<span>
 								С уважением, <br />
 								Директор
@@ -190,26 +196,44 @@ function Preview() {
 							<div className='flex items-center'>
 								<span>Хамиев А.Х.</span>
 								<img
+									className='w-full max-w-28'
 									src='/signature.png'
 									alt='signature of director'
-									width={120}
+									width={112}
 								/>
-								<img src='/stamp.png' alt='company stamp' width={200} />
+								<img
+									className='w-full max-w-48'
+									src='/stamp.png'
+									alt='company stamp'
+									width={192}
+								/>
 							</div>
 						</div>
 					</div>
 					<img
-						className='self-end max-w-[370px] mt-auto'
+						className='self-end w-[60%] max-w-[370px] mt-auto'
 						src='/5.png'
 						alt='illustrator'
 					/>
 				</div>
 				<div
-					className='w-[794px] h-[1123px] mx-auto border border-slate-400 bg-[url("/2.jpg")] bg-contain bg-center bg-no-repeat'
-					ref={pageThreeRef}></div>
+					className='max-w-[794px] max-h-[1123px] shadow-xl mx-auto'
+					ref={pageThreeRef}>
+					<img
+						className='w-full h-full object-cover'
+						src='/2.jpg'
+						alt='max product info'
+					/>
+				</div>
 				<div
-					className='w-[794px] h-[1123px] mx-auto border border-slate-400 bg-[url("/3.jpg")] bg-contain bg-center bg-no-repeat'
-					ref={pageFourRef}></div>
+					className='max-w-[794px] w-full max-h-[1123px] shadow-xl mx-auto'
+					ref={pageFourRef}>
+					<img
+						className='w-full h-full object-contain'
+						src='/3.jpg'
+						alt='max product info'
+					/>
+				</div>
 			</div>
 		</div>
 	);

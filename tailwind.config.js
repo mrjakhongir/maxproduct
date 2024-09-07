@@ -22,6 +22,11 @@ export default {
 			animation: {
 				wrapFromBottom: 'wrapFromBottom 0.6s ease forwards',
 			},
+			screens: {
+				xs: '475px',
+				'2xl': '1440px',
+				'3xl': '1600px',
+			},
 		},
 	},
 	plugins: [],
