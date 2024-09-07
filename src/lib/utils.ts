@@ -47,9 +47,9 @@ export function removeFromLeft(str: string, num: number) {
 export function convertFillerName(filler: string) {
 	switch (filler) {
 		case 'basalt':
-			return 'Базальт';
+			return 'Базальта';
 		case 'polystyreneFoam':
-			return 'Пенопласт';
+			return 'Пенопласта';
 		default:
 			return 'Пенополиуретана';
 	}

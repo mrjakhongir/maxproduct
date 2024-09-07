@@ -13,12 +13,16 @@ function Form() {
 		thickness: 't50',
 		upperCoverThickness: 'ct035',
 		lowerCoverThickness: 'ct035',
-		filler: 'polystyreneFoam',
-		discount: '5',
-		area: '1',
+		filler: 'basalt',
+		area: '',
+		discount: '',
 	};
 
-	useEffect(() => setOrders([newOrder]), [market]);
+	useEffect(() => {
+		if (orders.length === 0) {
+			setOrders([newOrder]);
+		}
+	}, [market]);
 
 	function addArea() {
 		setOrders([...orders, newOrder]);
@@ -36,10 +40,10 @@ function Form() {
 			<div className='flex flex-col gap-5'>
 				{orders.length > 0 &&
 					orders.map((order, index) => (
-						<Features key={index} order={order} setNewOrder={setOrders} />
+						<Features key={index} order={order} setNewOrder={setOrders} index={index} />
 					))}
 			</div>
-			<div className='flex gap-5 mt-5 pb-5' ref={btnRef}>
+			<div className='flex gap-5 mt-5 pb-5 pr-12' ref={btnRef}>
 				<PrintBtn />
 				<AddBtn addArea={addArea} />
 			</div>

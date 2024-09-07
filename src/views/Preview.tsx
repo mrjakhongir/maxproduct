@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
 	calculatePrice,
 	convertFillerName,
@@ -63,11 +63,18 @@ function Preview() {
 
 	return (
 		<div className='p-5 flex flex-col'>
-			<button
-				className='rounded-md py-2 px-8 mb-5 text-white text-lg font-semibold bg-[#0066B0] transition-all hover:opacity-80 active:scale-95 mx-auto'
-				onClick={printOrder}>
-				Download
-			</button>
+			<div className='mb-5 text-white text-lg font-semibold mx-auto flex items-center gap-8'>
+				<Link
+					to='..'
+					className='rounded-md py-2 px-8 bg-orange-500 transition-all hover:opacity-80 active:scale-95 '>
+					Edit
+				</Link>
+				<button
+					className='rounded-md py-2 px-8 bg-[#0066B0] transition-all hover:opacity-80 active:scale-95'
+					onClick={printOrder}>
+					Download
+				</button>
+			</div>
 			<div className='flex flex-col gap-5'>
 				<div
 					className='w-[794px] h-[1123px] mx-auto border border-slate-400 bg-[url("/1.jpg")] bg-contain bg-center bg-no-repeat'
@@ -122,9 +129,8 @@ function Preview() {
 										<td>{index + 1}</td>
 										<td>
 											Трёхслойные{' '}
-											{order.type === 'roof' ? 'кровельные' : 'стеновые'} Цена
-											со скидкой {market === 'Foreign' ? '' : '(с НДС)'} Сэндвич
-											панели из {convertFillerName(order.filler)}
+											{order.type === 'roof' ? 'кровельные' : 'стеновые'}{' '}
+											Сэндвич панели из {convertFillerName(order.filler)}
 										</td>
 										<td>м2</td>
 										<td>ТМЗ</td>
