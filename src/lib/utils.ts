@@ -72,3 +72,15 @@ export function generateInvoiceNumber() {
 	const uniqueNumber = (lastThreeDigits + randomComponent) % 10000;
 	return uniqueNumber.toString().padStart(4, '0');
 }
+
+export async function getExchangeRate() {
+	try {
+		const response = await fetch(
+			'https://v6.exchangerate-api.com/v6/40a0d00e41ff37fb9e17b47f/latest/USD'
+		);
+		const data = await response.json();
+		return data.conversion_rates.UZS;
+	} catch (err) {
+		console.log(err);
+	}
+}

@@ -1,6 +1,6 @@
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
 	calculatePrice,
@@ -8,12 +8,14 @@ import {
 	formatDate,
 	formatString,
 	generateInvoiceNumber,
+	getExchangeRate,
 	removeFromLeft,
 } from '../lib/utils';
 import { Area } from '../lib/definitions';
 import { useData } from '../hooks/useData';
 
 function Preview() {
+	const [exchangeRate, setExchangeRate] = useState<number | null>(null);
 	const pageTwoRef = useRef<HTMLDivElement>(null);
 	const pageOneRef = useRef<HTMLDivElement>(null);
 	const pageThreeRef = useRef<HTMLDivElement>(null);
@@ -61,6 +63,23 @@ function Preview() {
 		return formatString(priceWithWAT, market);
 	}
 
+	function convertPrice(order: Area) {
+		const { price } = calculatePrice(order, market);
+		if (exchangeRate) {
+			const priceNoWET = (price / 1.12) * exchangeRate;
+			return formatString(priceNoWET, 'Local');
+		}
+	}
+
+	useEffect(() => {
+		async function fetchExchangeRate() {
+			const rate = await getExchangeRate();
+			setExchangeRate(rate);
+		}
+		fetchExchangeRate();
+	}, []);
+
+	console.log(exchangeRate);
 	return (
 		<div className='p-5 flex flex-col'>
 			<div className='mb-5 text-white text-lg font-semibold mx-auto flex items-center gap-8'>
@@ -144,7 +163,14 @@ function Preview() {
 										</td>
 										<td>{removeFromLeft(order.thickness, 1)}мм</td>
 										<td>1</td>
-										<td>{calcPrice(order)}</td>
+										<td>
+											<div className='border-b border-b-slate-700 py-2'>
+												{calcPrice(order)}
+											</div>
+											<div className='py-2'>
+												{market === 'Foreign' && convertPrice(order)}
+											</div>
+										</td>
 									</tr>
 								))}
 							</tbody>
