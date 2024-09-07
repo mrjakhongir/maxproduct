@@ -1,4 +1,3 @@
-import Footer from '../layouts/Footer';
 import Header from '../layouts/Header';
 import AccordionLabel from '../components/AccordionLabel';
 import Form from '../layouts/Form';
@@ -26,7 +25,6 @@ function Home() {
 				</div>
 				<Form />
 			</div>
-			<Footer />
 		</div>
 	);
 }

@@ -14,7 +14,7 @@ function Form() {
 		upperCoverThickness: 'ct035',
 		lowerCoverThickness: 'ct035',
 		filler: 'basalt',
-		area: '',
+		area: '300',
 		discount: '',
 	};
 
@@ -36,11 +36,16 @@ function Form() {
 	}
 
 	return (
-		<div className='flex flex-col transition-all'>
-			<div className='flex flex-col gap-5'>
+		<div className='flex flex-col'>
+			<div className='flex flex-col'>
 				{orders.length > 0 &&
 					orders.map((order, index) => (
-						<Features key={index} order={order} setNewOrder={setOrders} index={index} />
+						<Features
+							key={index}
+							order={order}
+							setNewOrder={setOrders}
+							index={index}
+						/>
 					))}
 			</div>
 			<div className='flex gap-5 mt-5 pb-5 pr-12' ref={btnRef}>

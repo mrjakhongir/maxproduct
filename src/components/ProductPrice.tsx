@@ -7,12 +7,19 @@ type ProductPriceProps = {
 };
 
 function ProductPrice({ newOrder }: ProductPriceProps) {
-	const { market } = useData();
-	const { price, totalPriceWithDiscount } = calculatePrice(newOrder, market);
-	const formattedPrice = formatString(price, market);
+	const { market, exchangeRate } = useData();
+	const { endPrice, totalPriceWithDiscount } = calculatePrice(
+		newOrder,
+		market,
+		exchangeRate
+	);
+	const formattedPrice = formatString(endPrice, market);
 	const formattedTotalPrice = formatString(totalPriceWithDiscount, market);
 	return (
-		<div className='flex flex-col justify-between border-t bg-[#0066B0] text-white rounded-md py-1 px-2'>
+		<div
+			className={`flex flex-col justify-between border-t text-white rounded-md py-1 px-2 ${
+				market === 'Local' ? 'bg-[#0066B0]' : 'bg-[#E31E24]'
+			}`}> 
 			<div className='flex justify-between'>
 				<h2 className='font-semibold'>Цена:</h2>
 				<span>{formattedPrice}</span>

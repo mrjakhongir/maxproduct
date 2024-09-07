@@ -5,7 +5,11 @@ export function capitalizeText(str: string) {
 	return str.replace(str[0], str[0].toUpperCase());
 }
 
-export function calculatePrice(order: Area, market: string) {
+export function calculatePrice(
+	order: Area,
+	market: string,
+	exchangeRate: number
+) {
 	const {
 		type,
 		thickness,
@@ -15,16 +19,16 @@ export function calculatePrice(order: Area, market: string) {
 		discount,
 	} = order;
 
-	const upPrice =
-		prices[market.toLowerCase()][type][thickness][upperCoverThickness][filler];
-	const lowPrice =
-		prices[market.toLowerCase()][type][thickness][lowerCoverThickness][filler];
+	const upPrice = prices[type][thickness][upperCoverThickness][filler];
+	const lowPrice = prices[type][thickness][lowerCoverThickness][filler];
 
-	const price = (Number(upPrice) + Number(lowPrice)) / 2;
-	const totalPrice = +order.area * price;
+	const price =
+		((Number(upPrice) + Number(lowPrice)) / 2) * (1 - Number(discount) / 100);
+	const endPrice = market === 'Local' ? price : price / 1.12 / exchangeRate;
+	const totalPrice = +order.area * endPrice;
 	const totalPriceWithDiscount = totalPrice * (1 - Number(discount) / 100);
 
-	return { price, totalPriceWithDiscount };
+	return { endPrice, totalPriceWithDiscount };
 }
 
 export function formatString(price: number, market: string) {

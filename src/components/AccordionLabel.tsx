@@ -15,9 +15,9 @@ function AccordionLabel({
 }: AccordionLabelProps) {
 	return (
 		<div
-			className={`flex items-center justify-between text-slate-700 text-xl py-2 px-6 transition-all cursor-pointer rounded-md hover:bg-slate-100 select-none mb-3 ${
-				market === content ? 'bg-slate-200' : 'bg-slate-50'
-			}`}
+			className={`flex items-center justify-between text-white text-xl py-2 px-6 transition-all cursor-pointer rounded-md hover:opacity-100 select-none mb-3 ${
+				content === 'Foreign' ? 'bg-[#E31E24]' : 'bg-[#0066B0]'
+			} ${market === content ? 'opacity-100' : 'opacity-60'}`}
 			onClick={() => trigger(content)}>
 			<div className='flex items-center gap-2'>
 				<img src={src} alt='icon' width={24} height={24} />

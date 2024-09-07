@@ -1,8 +1,9 @@
 function Header() {
 	return (
-		<header className='mb-8 py-4 bg-[#0066B0]'>
+		<header className='flex items-center justify-center gap-5 mb-8 py-4 bg-[#0066B0]'>
+			<img className='max-w-[150px]' src='/logo.png' alt='max product logo' />
 			<h1 className='text-center text-2xl text-white font-semibold'>
-				Рассчитать стоимость товара
+				КП Конструктор
 			</h1>
 		</header>
 	);

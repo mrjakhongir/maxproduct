@@ -9,7 +9,7 @@ type ProductFillerProps = {
 
 const options = [
 	{ id: 1, label: 'Пенопласт', value: 'polystyreneFoam' },
-	{ id: 2, label: 'Базалт', value: 'basalt' },
+	{ id: 2, label: 'Базалть', value: 'basalt' },
 	{ id: 3, label: 'Пенополиуретана', value: 'polyurethaneFoam' },
 ];
 function ProductFiller({ setNewOrder, newOrder }: ProductFillerProps) {

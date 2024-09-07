@@ -1,6 +1,6 @@
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
 	calculatePrice,
@@ -15,13 +15,12 @@ import { Area } from '../lib/definitions';
 import { useData } from '../hooks/useData';
 
 function Preview() {
-	const [exchangeRate, setExchangeRate] = useState<number | null>(null);
 	const pageTwoRef = useRef<HTMLDivElement>(null);
 	const pageOneRef = useRef<HTMLDivElement>(null);
 	const pageThreeRef = useRef<HTMLDivElement>(null);
 	const pageFourRef = useRef<HTMLDivElement>(null);
 	const location = useLocation();
-	const { market, orders } = useData();
+	const { market, orders, setExchangeRate, exchangeRate } = useData();
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -58,17 +57,8 @@ function Preview() {
 	}
 
 	function calcPrice(order: Area) {
-		const { price } = calculatePrice(order, market);
-		const priceWithWAT = price + price * 0.15;
-		return formatString(priceWithWAT, market);
-	}
-
-	function convertPrice(order: Area) {
-		const { price } = calculatePrice(order, market);
-		if (exchangeRate) {
-			const priceNoWET = (price / 1.12) * exchangeRate;
-			return formatString(priceNoWET, 'Local');
-		}
+		const { endPrice } = calculatePrice(order, market, exchangeRate);
+		return formatString(endPrice, market);
 	}
 
 	useEffect(() => {
@@ -77,9 +67,10 @@ function Preview() {
 			setExchangeRate(rate);
 		}
 		fetchExchangeRate();
+		const intervalId = setInterval(fetchExchangeRate, 2 * 60 * 60 * 1000);
+		return () => clearInterval(intervalId);
 	}, []);
 
-	console.log(exchangeRate);
 	return (
 		<div className='p-5 flex flex-col'>
 			<div className='mb-5 text-white text-lg font-semibold mx-auto flex items-center gap-8'>
@@ -163,14 +154,7 @@ function Preview() {
 										</td>
 										<td>{removeFromLeft(order.thickness, 1)}мм</td>
 										<td>1</td>
-										<td>
-											<div className='border-b border-b-slate-700 py-2'>
-												{calcPrice(order)}
-											</div>
-											<div className='py-2'>
-												{market === 'Foreign' && convertPrice(order)}
-											</div>
-										</td>
+										<td>{calcPrice(order)}</td>
 									</tr>
 								))}
 							</tbody>

@@ -24,14 +24,12 @@ function Features({ order, setNewOrder, index }: FeaturesProps) {
 				const updated = prevState.filter((item) => item.id !== order.id);
 				return updated;
 			});
-		}, 200);
+			setAnimate(false);
+		}, 600);
 	}
 	return (
-		<div className='flex gap-5'>
-			<div
-				className={`flex-1 flex flex-col gap-3 rounded-md bg-slate-50 px-5 transition-all py-3 h-full ${
-					animate && 'duration-200 h-0 overflow-hidden py-0'
-				}`}>
+		<div className={`flex gap-5 mb-5 ${animate && 'animate-wrapFromBottom'}`}>
+			<div className='flex-1 flex flex-col gap-3 rounded-md bg-slate-50 px-5 transition-all py-3'>
 				<ProductType setNewOrder={setNewOrder} newOrder={order} />
 				<ProductThickness setNewOrder={setNewOrder} newOrder={order} />
 				<UpperCoverThickness setNewOrder={setNewOrder} newOrder={order} />
