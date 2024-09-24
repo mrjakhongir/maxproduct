@@ -10,7 +10,7 @@ type ProductTypeProps = {
 
 const options = [
 	{ id: 1, label: 'Стеновые', value: 'border' },
-	{ id: 2, label: 'Кровелные', value: 'roof' },
+	{ id: 2, label: 'Кровельные', value: 'roof' },
 ];
 
 function ProductType({ newOrder, setNewOrder }: ProductTypeProps) {
