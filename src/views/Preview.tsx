@@ -73,16 +73,16 @@ function Preview() {
 
 	return (
 		<div className='p-2 md:p-5 flex flex-col'>
-			<div className='mb-5 text-white text-sm md:text-lg font-semibold mx-auto flex items-center gap-8'>
+			<div className='mb-5 self-stretch flex gap-4 md:gap-8 mx-auto text-white text-sm md:text-lg font-semibold'>
 				<Link
 					to='..'
-					className='rounded-md py-2 px-8 bg-orange-500 transition-all hover:opacity-80 active:scale-95 '>
-					Edit
+					className='rounded-md py-2 px-8 bg-orange-500 transition-all hover:opacity-80 active:scale-95'>
+					Редактировать
 				</Link>
 				<button
 					className='rounded-md py-2 px-8 bg-[#0066B0] transition-all hover:opacity-80 active:scale-95'
 					onClick={printOrder}>
-					Download
+					Скачать
 				</button>
 			</div>
 			<div className='flex flex-col gap-5'>
