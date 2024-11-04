@@ -1,15 +1,15 @@
-import Header from '../layouts/Header';
-import AccordionLabel from '../components/AccordionLabel';
-import Form from '../layouts/Form';
-import { useData } from '../hooks/useData';
+import AccordionLabel from '../components/AccordionLabel'
+import { useData } from '../hooks/useData'
+import Form from '../layouts/Form'
+import Header from '../layouts/Header'
 
 function Home() {
-	const { market, setMarket } = useData();
+	const { market, setMarket } = useData()
 	return (
 		<div className='min-h-[100vh] flex flex-col'>
 			<Header />
-			<div className='container mx-auto max-w-[620px] px-3 flex flex-col mb-5'>
-				<div className='flex gap-6'>
+			<div className='container mx-auto max-w-[630px] px-3 flex flex-col mb-5'>
+				<div className='flex gap-6 mr-12'>
 					<AccordionLabel
 						content='Local'
 						trigger={setMarket}
@@ -26,7 +26,7 @@ function Home() {
 				<Form />
 			</div>
 		</div>
-	);
+	)
 }
 
-export default Home;
+export default Home

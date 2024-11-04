@@ -1,25 +1,28 @@
-import { createContext, useState } from 'react';
-import { Area } from '../lib/definitions';
+import { createContext, useState } from 'react'
+import { Area } from '../lib/definitions'
 
 type DataContextType = {
-	orders: Area[];
-	setOrders: React.Dispatch<React.SetStateAction<Area[]>>;
-	market: string;
-	setMarket: React.Dispatch<React.SetStateAction<string>>;
-	exchangeRate: number;
-	setExchangeRate: React.Dispatch<React.SetStateAction<number>>;
-};
+	orders: Area[]
+	setOrders: React.Dispatch<React.SetStateAction<Area[]>>
+	market: string
+	setMarket: React.Dispatch<React.SetStateAction<string>>
+	manager: string
+	setManager: React.Dispatch<React.SetStateAction<string>>
+	exchangeRate: number
+	setExchangeRate: React.Dispatch<React.SetStateAction<number>>
+}
 
-export const DataContext = createContext<DataContextType | null>(null);
+export const DataContext = createContext<DataContextType | null>(null)
 
 type DataProviderProps = {
-	children: React.ReactNode;
-};
+	children: React.ReactNode
+}
 
 export function DataProvider({ children }: DataProviderProps) {
-	const [orders, setOrders] = useState<Area[]>([]);
-	const [market, setMarket] = useState('Local');
-	const [exchangeRate, setExchangeRate] = useState<number>(12700);
+	const [orders, setOrders] = useState<Area[]>([])
+	const [market, setMarket] = useState('Local')
+	const [manager, setManager] = useState('Элёр')
+	const [exchangeRate, setExchangeRate] = useState<number>(12700)
 
 	return (
 		<DataContext.Provider
@@ -30,8 +33,11 @@ export function DataProvider({ children }: DataProviderProps) {
 				setMarket,
 				exchangeRate,
 				setExchangeRate,
-			}}>
+				manager,
+				setManager,
+			}}
+		>
 			{children}
 		</DataContext.Provider>
-	);
+	)
 }

@@ -9,9 +9,9 @@ type ProductFillerProps = {
 
 const options = [
 	{ id: 1, label: 'Пенопласт', value: 'polystyreneFoam' },
-	{ id: 2, label: 'Базалть', value: 'basalt' },
+	{ id: 2, label: 'Базальт', value: 'basalt' },
 	{ id: 3, label: 'Пенополиуретан', value: 'polyurethaneFoam' },
-];
+]
 function ProductFiller({ setNewOrder, newOrder }: ProductFillerProps) {
 	return (
 		<div className='flex items-center gap-10 text-slate-700'>

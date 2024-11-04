@@ -1,14 +1,15 @@
-import { useEffect, useRef } from 'react';
-import Features from '../components/Features';
-import AddBtn from '../components/AddBtn.tsx';
-import PrintBtn from '../components/PrintBtn.tsx';
-import { useData } from '../hooks/useData.tsx';
+import { useEffect, useRef } from 'react'
+import AddBtn from '../components/AddBtn.tsx'
+import Features from '../components/Features'
+import PrintBtn from '../components/PrintBtn.tsx'
+import { useData } from '../hooks/useData.tsx'
 
 function Form() {
-	const { orders, setOrders, market } = useData();
-	const btnRef = useRef<HTMLDivElement>(null);
+	const { orders, setOrders, market } = useData()
+	const btnRef = useRef<HTMLDivElement>(null)
 	const newOrder = {
 		id: orders.length * Date.now(),
+		manager: 'Manager 1',
 		type: 'border',
 		thickness: 't50',
 		upperCoverThickness: 'ct035',
@@ -16,23 +17,23 @@ function Form() {
 		filler: 'basalt',
 		area: '300',
 		discount: '',
-	};
+	}
 
 	useEffect(() => {
 		if (orders.length === 0) {
-			setOrders([newOrder]);
+			setOrders([newOrder])
 		}
-	}, [market]);
+	}, [market])
 
 	function addArea() {
-		setOrders([...orders, newOrder]);
+		setOrders([...orders, newOrder])
 		setTimeout(() => {
 			btnRef.current?.scrollIntoView({
 				behavior: 'smooth',
 				block: 'end',
 				inline: 'nearest',
-			});
-		}, 0);
+			})
+		}, 0)
 	}
 
 	return (
@@ -53,7 +54,7 @@ function Form() {
 				<AddBtn addArea={addArea} />
 			</div>
 		</div>
-	);
+	)
 }
 
-export default Form;
+export default Form

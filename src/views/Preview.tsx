@@ -1,7 +1,9 @@
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
-import { useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import html2canvas from 'html2canvas'
+import { jsPDF } from 'jspdf'
+import { useEffect, useRef } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { useData } from '../hooks/useData'
+import { Area } from '../lib/definitions'
 import {
 	calculatePrice,
 	convertFillerName,
@@ -10,85 +12,94 @@ import {
 	generateInvoiceNumber,
 	getExchangeRate,
 	removeFromLeft,
-} from '../lib/utils';
-import { Area } from '../lib/definitions';
-import { useData } from '../hooks/useData';
+} from '../lib/utils'
 
 function Preview() {
-	const pageTwoRef = useRef<HTMLDivElement>(null);
-	const pageOneRef = useRef<HTMLDivElement>(null);
-	const pageThreeRef = useRef<HTMLDivElement>(null);
-	const pageFourRef = useRef<HTMLDivElement>(null);
-	const location = useLocation();
-	const { market, orders, setExchangeRate, exchangeRate } = useData();
+	const pageTwoRef = useRef<HTMLDivElement>(null)
+	const pageOneRef = useRef<HTMLDivElement>(null)
+	const pageThreeRef = useRef<HTMLDivElement>(null)
+	const pageFourRef = useRef<HTMLDivElement>(null)
+	const location = useLocation()
+	const { market, orders, setExchangeRate, exchangeRate, manager } = useData()
 
 	useEffect(() => {
 		setTimeout(() => {
-			window.scrollTo(0, 0);
-		}, 2);
-	}, [location.pathname]);
+			window.scrollTo(0, 0)
+		}, 2)
+	}, [location.pathname])
 
 	async function printOrder() {
-		const pages = [pageOneRef, pageTwoRef, pageThreeRef, pageFourRef];
+		const pages = [pageOneRef, pageTwoRef, pageThreeRef, pageFourRef]
 
-		const pdf = new jsPDF('portrait', 'pt', 'a4');
-		pdf.setFontSize(12);
+		const pdf = new jsPDF('portrait', 'pt', 'a4')
+		pdf.setFontSize(12)
 
 		for (let i = 0; i < pages.length; i++) {
-			const page = pages[i].current;
+			const page = pages[i].current
 			if (page) {
 				const canvas = await html2canvas(page, {
 					scale: 2,
-				});
-				const imgData = canvas.toDataURL('image/jpeg', 1);
-				const imgWidth = canvas.width;
-				const imgHeight = canvas.height;
-				const pdfWidth = pdf.internal.pageSize.getWidth();
-				const pdfHeight = (imgHeight * pdfWidth) / imgWidth;
+				})
+				const imgData = canvas.toDataURL('image/jpeg', 1)
+				const imgWidth = canvas.width
+				const imgHeight = canvas.height
+				const pdfWidth = pdf.internal.pageSize.getWidth()
+				const pdfHeight = (imgHeight * pdfWidth) / imgWidth
 
-				pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+				pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight)
 
 				if (i < pages.length - 1) {
-					pdf.addPage();
+					pdf.addPage()
 				}
 			}
 		}
-		pdf.save('order.pdf');
+
+		pdf.save('order.pdf')
 	}
 
 	function calcPrice(order: Area) {
-		const { endPrice } = calculatePrice(order, market, exchangeRate);
-		return formatString(endPrice, market);
+		const { endPrice } = calculatePrice(order, market, exchangeRate)
+		return formatString(endPrice, market)
 	}
 
 	useEffect(() => {
 		async function fetchExchangeRate() {
-			const rate = await getExchangeRate();
-			setExchangeRate(rate);
+			const rate = await getExchangeRate()
+			setExchangeRate(rate)
 		}
-		fetchExchangeRate();
-		const intervalId = setInterval(fetchExchangeRate, 2 * 60 * 60 * 1000);
-		return () => clearInterval(intervalId);
-	}, []);
+		fetchExchangeRate()
+		const intervalId = setInterval(fetchExchangeRate, 2 * 60 * 60 * 1000)
+		return () => clearInterval(intervalId)
+	}, [])
 
 	return (
 		<div className='p-2 md:p-5 flex flex-col'>
 			<div className='mb-5 self-stretch flex gap-4 md:gap-8 mx-auto text-white text-sm md:text-lg font-semibold'>
 				<Link
 					to='..'
-					className='rounded-md py-2 px-8 bg-orange-500 transition-all hover:opacity-80 active:scale-95'>
+					className='rounded-md py-2 px-8 bg-orange-500 transition-all hover:opacity-80 active:scale-95'
+				>
 					Редактировать
 				</Link>
 				<button
 					className='rounded-md py-2 px-8 bg-[#0066B0] transition-all hover:opacity-80 active:scale-95'
-					onClick={printOrder}>
+					onClick={printOrder}
+				>
 					Скачать
 				</button>
+				{/* <div className='relative'>
+					<button className='flex items-center gap-2 rounded-md py-2 px-8 bg-green-600 transition-all hover:opacity-80 active:scale-95'>
+						<img src='/share.svg' alt='share' className='w-5 h-5' />
+						<span>Поделиться</span>
+					</button>
+					<ShareDialog />
+				</div> */}
 			</div>
 			<div className='flex flex-col gap-5'>
 				<div
 					className='max-w-[794px] w-full max-h-[1123px] shadow-xl mx-auto'
-					ref={pageOneRef}>
+					ref={pageOneRef}
+				>
 					<img
 						className='w-full h-full object-contain'
 						src='/1.jpg'
@@ -97,7 +108,8 @@ function Preview() {
 				</div>
 				<div
 					className='flex flex-col max-w-[794px] w-full h-[1123px] shadow-xl mx-auto text-sm'
-					ref={pageTwoRef}>
+					ref={pageTwoRef}
+				>
 					<img
 						className='mb-10 self-end w-[60%] max-w-[570px]'
 						src='/4.png'
@@ -141,7 +153,8 @@ function Preview() {
 								{orders.map((order, index) => (
 									<tr
 										key={index}
-										className='[&>td]:border [&>td]:border-slate-700 [&>td]:text-center md:[&>td]:p-1'>
+										className='[&>td]:border [&>td]:border-slate-700 [&>td]:text-center md:[&>td]:p-1'
+									>
 										<td>{index + 1}</td>
 										<td>
 											Трёхслойные{' '}
@@ -210,15 +223,29 @@ function Preview() {
 							</div>
 						</div>
 					</div>
-					<img
-						className='self-end w-[60%] max-w-[370px] mt-auto'
-						src='/5.png'
-						alt='illustrator'
-					/>
+					<div className='mt-auto flex justify-between items-center text-sm md:text-xl font-semibold'>
+						<div className='ml-2 md:ml-5 flex items-center gap-2'>
+							<img
+								src='/headphone.svg'
+								alt='headphone'
+								width={24}
+								height={24}
+							/>
+							<span className='text-[#0066B0]'>
+								{manager.slice(0, manager.indexOf('%'))}
+							</span>
+						</div>
+						<div className="flex items-center justify-center w-[60%] max-w-[370px] bg-[url('/5.png')] h-10 md:h-16">
+							<span className='text-white -mr-4'>
+								{manager.slice(manager.lastIndexOf('%') + 1)}
+							</span>
+						</div>
+					</div>
 				</div>
 				<div
 					className='max-w-[794px] max-h-[1123px] shadow-xl mx-auto'
-					ref={pageThreeRef}>
+					ref={pageThreeRef}
+				>
 					<img
 						className='w-full h-full object-cover'
 						src='/2.jpg'
@@ -227,7 +254,8 @@ function Preview() {
 				</div>
 				<div
 					className='max-w-[794px] w-full max-h-[1123px] shadow-xl mx-auto'
-					ref={pageFourRef}>
+					ref={pageFourRef}
+				>
 					<img
 						className='w-full h-full object-contain'
 						src='/3.jpg'
@@ -236,7 +264,7 @@ function Preview() {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }
 
-export default Preview;
+export default Preview
