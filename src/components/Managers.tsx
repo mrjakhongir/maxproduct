@@ -12,7 +12,7 @@ function Managers() {
 	const { manager, setManager } = useData()
 	return (
 		<div className='flex items-center gap-10 text-slate-700'>
-			<Label content='Managers:' />
+			<Label content='Менеджер:' />
 			<select
 				className='flex-1 px-3 py-3 min-w-24 max-w-[250px] rounded-md bg-transparent border text-lg cursor-pointer transition-all hover:border-slate-700'
 				value={manager}
